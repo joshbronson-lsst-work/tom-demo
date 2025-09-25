@@ -14,6 +14,30 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 
+csrf_trusted_origins: []
+
+# Automatic certificate management via cert-manager
+# Set enabled=true and provide issuer details to have cert-manager
+# obtain and renew Let's Encrypt certificates for your ingress host(s).
+certManager:
+  enabled: false
+  # One of: ClusterIssuer or Issuer
+  issuerKind: ClusterIssuer
+  # Name of the (Cluster)Issuer resource to use
+  issuerName: letsencrypt-prod
+  # ACME account email
+  email: admin@example.com
+  # ACME directory URL (use staging for initial tests)
+  acmeServer: https://acme-v02.api.letsencrypt.org/directory
+  # HTTP-01 solver configuration
+  http01:
+    # Ingress class used by your NGINX controller
+    ingressClass: nginx-ingress-private
+  # TLS secret to be managed by cert-manager; if empty, defaults to
+  # "<fullname>-tls". You may also continue supplying
+  # ingress.tls[0].secretName to control it explicitly.
+  tlsSecretName: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -49,6 +73,7 @@ service:
 ingress:
   enabled: false
   annotations: {}
+    # kubernetes.io/ingress.global-static-ip-name: tom-static-ip
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:

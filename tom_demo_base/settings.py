@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import ast
+import re
 import tempfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -186,7 +187,10 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:80',
     'http://*',
     'https://*',
-    'https://tom-demo.lco.global'
+    'https://tom-demo.lco.global',
+    *(
+        s for s in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if s
+    )
 ]
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

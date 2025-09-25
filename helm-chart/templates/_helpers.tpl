@@ -92,6 +92,8 @@ build it here and use it everywhere.
   value: "/tmp"
 - name: TOM_DEMO_DEBUG
   value: {{ .Values.djangoDebug | toString | lower | title | quote }}
+- name: CSRF_TRUSTED_ORIGINS
+  value: {{ join "," .Values.csrf_trusted_origins | quote }}
 {{- end }}
 
 {{/*

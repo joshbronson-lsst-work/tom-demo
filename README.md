@@ -24,3 +24,24 @@ If you are interested in implementing your own TOM using the TOM Toolkit, you ma
 * [TOM Toolkit Documentation](https://tom-toolkit.readthedocs.io/)
 * [Joining the TOM Toolkit Slack](https://join.slack.com/t/tom-toolkit/shared_invite/zt-28ameesvb-QK5o~zWLlnL_Zmh22izKgg)
 * [Contact the TOM Toolkit Developers](tomtoolkit-maintainers@lco.global)
+
+# Creating an Externally Facing TOM
+Creating an externally-facing TOM can be done in a few different
+ways. The basic ingredents include the following:
+* a domain name and control over DNS entries for that domain
+* a platform on which you can spin up a Kubernetes cluster and a
+  static IP address.
+
+There are many ways to gather these ingredients, and users should
+decide for themselves how to gather them. However, there are
+instructions [here](deployment.md) to deploy an external TOM if you
+are willing to use the following kinds of ingredients:
+* a domain name and control over DNS entries for that domain:
+  Squarespace. (You can easily use your own DNS server, though, if you
+  have the ability to create DNS A records for hosts for which you
+  have matching TLS keys at your organization.)
+* a platform on which you can spin up a Kubernetes cluster and a
+  static IP address: Google Compute Platform
+
+This isn't an endorsement of these particular tools, and many other
+fine alternatives exist for each of them.
