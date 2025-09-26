@@ -151,8 +151,6 @@ possible to simply run the scripts. First, create the Kubernetes
 cluster inside Google Compute Engine. This is a blank slate on which
 Kubernetes can deploy its objects:
 
-    export tom_hostname=TARGET_HOSTNAME_HERE 
-    export certmanager_email=YOUR_EMAIL_HERE 
     bash scripts/create_kubernetes_cluster_gcp.sh
 
 It is possible that something in that script will fail due to changes
@@ -166,7 +164,7 @@ the script once.
 
 Once that is complete, deploy the Kubernetes cluster:
 
-    export tom_hostname=TARGET_HOSTNAME_HERE 
+    export tom_hostname=TARGET_HOSTNAME_HERE
     export certmanager_email=YOUR_EMAIL_HERE 
     bash scripts/launch_kubernetes.sh
 
