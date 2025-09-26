@@ -10,7 +10,7 @@
 #--------------------------------------------------------------------------------
 
 # GCP and cluster configuration
-project_id=${project_id:-tom-demo-project-prebake}
+project_id=${project_id:-tom-demo-project}
 zone=${zone:-"us-central1-a"}
 
 proj_descr=${proj_descr:-"TOM Demo Project Prebake"}

@@ -112,10 +112,11 @@ the questions had been answered differently.
 
 ### Gcloud Commandline Tool Installation
 
-Next, install the [https://cloud.google.com/sdk/docs/install](gcloud
-commandline tool). There are multiple options available. I chose to
-click on the targball for my system,
-gcloud-cloud-cli-linux-x86_64.tar.gz, and untar it and install:
+Next, install the [gcloud commandline
+tool](https://cloud.google.com/sdk/docs/install), available from
+. There are multiple options available. I chose to click on the
+targball for my system, gcloud-cloud-cli-linux-x86_64.tar.gz, and
+untar it and install:
 
     tar zxf google-cloud-cli-linux-x86_64.tar.gz
     bash ./google-cloud-sdk/install.sh
@@ -134,7 +135,7 @@ command:
 # Configuration
 
 First, you may choose to edit the configuration file, which you can
-find at [scripts/common_config.sh](common_config.sh). Most of the
+find at [common_config.sh](scripts/common_config.sh). Most of the
 defaults in there should be reasonable for a demo, but at a minimum
 you will need to edit the tom_hostname variable. It should be the
 fully qualified domain name of your server.
@@ -227,7 +228,7 @@ to retrieve information about the certificat, you should see that the
 name of the certificate authority has (STAGING) in its name. That's
 because the Let's Encrypt certificate we are using by default points
 to the staging environment. To change that, edit
-[scripts/common_config.sh](common_conifg.sh) and edit the
+[common_conifg.sh](scripts/common_config.sh) and edit the
 `letsyncrypt_env` variable. Change its default to
 `prod`. Alternatively, you can export it, but you must remember to do
 so each time you run launch_kubernetes.sh
