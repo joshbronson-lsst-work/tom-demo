@@ -114,8 +114,9 @@ the questions had been answered differently.
 
 Next, install the [gcloud commandline
 tool](https://cloud.google.com/sdk/docs/install).  There are multiple
-options available. I chose to click on the targball for my system,
-gcloud-cloud-cli-linux-x86_64.tar.gz, and untar it and install:
+options available. The author chose to click on the targball for his
+system, gcloud-cloud-cli-linux-x86_64.tar.gz, and untar it and
+install:
 
     tar zxf google-cloud-cli-linux-x86_64.tar.gz
     bash ./google-cloud-sdk/install.sh
@@ -155,7 +156,7 @@ Kubernetes can deploy its objects:
 
 It is possible that something in that script will fail due to changes
 in the Google Compute Platform API, differences in your environment,
-changed configuraiton, or other issues. If it fails, look at the
+changed configuration, or other issues. If it fails, look at the
 comments near the commandline that failed. If you are able to resolve
 the issue, you should be able to simply rerun the script, which will
 pick up where it left off. If the error messages you see are related
@@ -227,8 +228,8 @@ to retrieve information about the certificat, you should see that the
 name of the certificate authority has (STAGING) in its name. That's
 because the Let's Encrypt certificate we are using by default points
 to the staging environment. To change that, edit
-[common_conifg.sh](scripts/common_config.sh) and edit the
-`letsyncrypt_env` variable. Change its default to
+[common_config.sh](scripts/common_config.sh) and edit the
+`letsencrypt_env` variable. Change its default to
 `prod`. Alternatively, you can export it, but you must remember to do
 so each time you run launch_kubernetes.sh
 

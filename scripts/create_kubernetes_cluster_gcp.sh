@@ -24,16 +24,16 @@ pushd "$(dirname "${BASH_SOURCE[0]}")"; proj_dir=`pwd`; popd
 # --------------------------------------------------------------------------------
 
 set -o pipefail # A command composed of piped commands is considered
-		# to have failed if any of its piped commands have
-		# failed.
+                # to have failed if any of its piped commands have
+                # failed.
 
-set -e		# Exit immediately if a command fails.
+set -e          # Exit immediately if a command fails.
 
-set -u		# When interpolating (substituting into a string) a variable,
-		# if that variable is unset, the command performing the
-		# substitution is considered to have failed.
+set -u          # When interpolating (substituting into a string) a variable,
+                # if that variable is unset, the command performing the
+                # substitution is considered to have failed.
 
-set -x		# Print each command as it is being executed.
+set -x          # Print each command as it is being executed.
 
 #--------------------------------------------------------------------------------
 # configuration
@@ -119,16 +119,16 @@ if [[ -z "$billing_account" ]]; then
     num_accounts="$(echo "$billing_accounts" | wc -w)"
 
     if [[ $num_accounts == 0 ]]; then
-	echo A billing account must be set up first on Google Compute Engine.
-	exit 1
+        echo A billing account must be set up first on Google Compute Engine.
+        exit 1
     elif [[ $num_accounts == 1 ]]; then
-	billing_account="$billing_accounts"
-	echo linking "$project_id" with billing account "$billing_account"
-	gcloud billing projects link "$project_id" --billing-account="$billing_account"
+        billing_account="$billing_accounts"
+        echo linking "$project_id" with billing account "$billing_account"
+        gcloud billing projects link "$project_id" --billing-account="$billing_account"
     else
-	echo Too many billing accounts. Choose manually and rerun this script.
-	gcloud billing accounts list --format="value(ACCOUNT_ID)"
-	exit 1
+        echo Too many billing accounts. Choose manually and rerun this script.
+        gcloud billing accounts list --format="value(ACCOUNT_ID)"
+        exit 1
     fi
 fi
 
@@ -168,11 +168,11 @@ echo "Waiting for creation of ${node_service_account}"
 for try in {1..5}; do
     # Check for the service account 
     if gcloud iam service-accounts describe "${node_service_account}" ; then
-	# Found the service account. break.
-	break
+        # Found the service account. break.
+        break
     else
-	echo "Problem. retrying in 60 seconds. This should not fail more than one or two times."
-	sleep 60
+        echo "Problem. retrying in 60 seconds. This should not fail more than one or two times."
+        sleep 60
     fi
 done
 
@@ -182,7 +182,7 @@ done
 for role in artifactregistry.reader logging.logWriter monitoring.metricWriter; do 
     echo ensuring role "$role"
     gcloud projects add-iam-policy-binding "$project_id" \
-	   --member="serviceAccount:${node_service_account}" --role="roles/${role}"
+           --member="serviceAccount:${node_service_account}" --role="roles/${role}"
 done
 
 # Finally, create a Kubernetes cluster with a configurable nubmer of
@@ -191,12 +191,12 @@ done
 # limits and explicit selectors.
 if ! gcloud container clusters describe --zone "$zone" "$cluster_name" >/dev/null 2>/dev/null; then
     echo "OK. cluster ${cluster_name} does not exist. creating it."
-    gcloud container clusters create "$cluster_name"	\
-	   --zone "$zone"				\
-	   --num-nodes="$nodes"				\
-	   --service-account="${node_service_account}"  \
-	   --machine-type="$machine"			\
-	   --enable-ip-alias
+    gcloud container clusters create "$cluster_name"    \
+           --zone "$zone"                               \
+           --num-nodes="$nodes"                         \
+           --service-account="${node_service_account}"  \
+           --machine-type="$machine"                    \
+           --enable-ip-alias
 fi
 
 # Finally, we will install the gke-gcloud-auth-plugin, and then use

@@ -22,16 +22,16 @@ pushd "$(dirname "${BASH_SOURCE[0]}")"; proj_dir=`pwd`; popd
 # --------------------------------------------------------------------------------
 
 set -o pipefail # A command composed of piped commands is considered
-		# to have failed if any of its piped commands have
-		# failed.
+                # to have failed if any of its piped commands have
+                # failed.
 
-set -e		# Exit immediately if a command fails.
+set -e          # Exit immediately if a command fails.
 
-set -u		# When interpolating (substituting into a string) a variable,
-		# if that variable is unset, the command performing the
-		# substitution is considered to have failed.
+set -u          # When interpolating (substituting into a string) a variable,
+                # if that variable is unset, the command performing the
+                # substitution is considered to have failed.
 
-set -x		# Print each command as it is being executed.
+set -x          # Print each command as it is being executed.
 
 #--------------------------------------------------------------------------------
 # configuration
@@ -58,7 +58,7 @@ fi
 # of Kubernetes. A Helm chart consists of a packaged, configurable set
 # of Kubernetes manifests. Manifests define Kubernetes objects,
 # sometimes in terms of other objects, and applying them to a
-# Kubernetes cluster will change it state, potentially launching pods
+# Kubernetes cluster will change its state, potentially launching pods
 # that host services, load balancing over them, configuring
 # connectivity, or making other changes. Applying a Helm chart to a
 # Kubernetes cluster results in a "release," which is effectively a
@@ -121,8 +121,8 @@ gcloud auth configure-docker "${registry_host}"
 if ! gcloud artifacts repositories describe --location "$location" "$image_repo" >/dev/null 2>/dev/null; then
     echo Creating repo "$image_repo"
     gcloud artifacts repositories create "$image_repo" \
-	   --repository-format=docker \
-	   --location "$location" \
+           --repository-format=docker \
+           --location "$location" \
            --description "Tom images"
 fi
 
@@ -161,13 +161,13 @@ chart_dir="$(dirname "${proj_dir}")"
 # in order to create a TLS interface to the service.
 # --------------------------------------------------------------------------------
 
-helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx	\
-     -n "${kubernetes_namespace}-ingress-nginx"				\
-     --create-namespace							\
-     --set controller.ingressClassResource.name=nginx-ingress-private	\
-     --set controller.ingressClass=nginx-ingress-private		\
-     --set controller.service.type=LoadBalancer				\
-     --set controller.service.externalTrafficPolicy=Local		\
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx        \
+     -n "${kubernetes_namespace}-ingress-nginx"                         \
+     --create-namespace                                                 \
+     --set controller.ingressClassResource.name=nginx-ingress-private   \
+     --set controller.ingressClass=nginx-ingress-private                \
+     --set controller.service.type=LoadBalancer                         \
+     --set controller.service.externalTrafficPolicy=Local               \
      --set controller.service.loadBalancerIP="$static_external_ip"      \
      --wait
 
@@ -200,15 +200,15 @@ else
 fi
 
 # Install the TOM helm chart!
-helm upgrade --install demo "${chart_dir}/helm-chart"	                                 \
-     -n "$kubernetes_namespace"				                                 \
-     --create-namespace					                                 \
-     -f helm-chart/values-dev.yaml			                                 \
-     --set image.repository="$image_full_name"		                                 \
-     --set image.tag="$image_tag"			                                 \
-     --set ingress.tls[0].secretName=tom-tls		                                 \
-     --set ingress.hosts[0].host="$tom_hostname"	                                 \
-     --set ingress.tls[0].hosts[0]="$tom_hostname"	                                 \
+helm upgrade --install demo "${chart_dir}/helm-chart"                                    \
+     -n "$kubernetes_namespace"                                                          \
+     --create-namespace                                                                  \
+     -f helm-chart/values-dev.yaml                                                       \
+     --set image.repository="$image_full_name"                                           \
+     --set image.tag="$image_tag"                                                        \
+     --set ingress.tls[0].secretName=tom-tls                                             \
+     --set ingress.hosts[0].host="$tom_hostname"                                         \
+     --set ingress.tls[0].hosts[0]="$tom_hostname"                                       \
      --set csrf_trusted_origins[0]="https://${tom_hostname}"                             \
      --set-string 'ingress.annotations.nginx\.ingress\.kubernetes\.io/ssl-redirect=true' \
      --set certManager.enabled=true                                                      \
