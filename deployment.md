@@ -112,10 +112,10 @@ the questions had been answered differently.
 
 ### Gcloud Commandline Tool Installation
 
-Next, install the [gcloud commandline tool](https://cloud.google.com/sdk/docs/install), available from
-. There are multiple options available. I chose to click on the
-targball for my system, gcloud-cloud-cli-linux-x86_64.tar.gz, and
-untar it and install:
+Next, install the [gcloud commandline
+tool](https://cloud.google.com/sdk/docs/install).  There are multiple
+options available. I chose to click on the targball for my system,
+gcloud-cloud-cli-linux-x86_64.tar.gz, and untar it and install:
 
     tar zxf google-cloud-cli-linux-x86_64.tar.gz
     bash ./google-cloud-sdk/install.sh
